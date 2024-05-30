@@ -18,7 +18,12 @@ int main(void ){
 
     act.sa_restorer=NULL;
     act.sa_flags =0;
-    
+
+    /*Inicia la configuracion de bloqueo de la señal 2 SIGINT*/
+    sigemptyset(&mask);
+    sigaddset(&mask,SIGINT);/*Ya no responde el control + c*/
+    sigprocmask(SIG_SETMASK, &mask, NULL);
+    /*Se termina la configuracion del bloqueo*/
 
     sigaction(SIGALRM,&act,NULL);
     alarm(1);
