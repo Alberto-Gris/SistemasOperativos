@@ -22,14 +22,29 @@ int main(void ){
     /*Inicia la configuracion de bloqueo de la señal 2 SIGINT*/
     sigemptyset(&mask);
     sigaddset(&mask,SIGINT);/*Ya no responde el control + c*/
+    sigaddset(&mask,SIGTSTP);/*Ya no responde el control + z*/
     sigprocmask(SIG_SETMASK, &mask, NULL);
     /*Se termina la configuracion del bloqueo*/
 
     sigaction(SIGALRM,&act,NULL);
     alarm(1);
+    char str[100];
+    int i=0;
     while (1)
     {
-        /* code */
+        if (i==10)
+        {
+            printf("Activado el ctrl+c\n");
+            sigemptyset(&mask);/*En esta parte del codigo volvemos a reactivar las señales de CTRL + C y Z*/
+            sigdelset(&mask,SIGINT);
+            sigdelset(&mask,SIGTSTP);
+            sigprocmask(SIG_SETMASK, &mask, NULL);
+        }
+        sleep(1);
+        i++;
+        //printf("Introduce una cadena: ");
+        //fgets(str,50,stdin);
+        //printf("%s",str);
     }
     
 }
