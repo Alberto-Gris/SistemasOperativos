@@ -42,9 +42,6 @@ int main(void ){
         }
         sleep(1);
         i++;
-        //printf("Introduce una cadena: ");
-        //fgets(str,50,stdin);
-        //printf("%s",str);
     }
     
 }
