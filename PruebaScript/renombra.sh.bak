@@ -1,0 +1,8 @@
+#!/usr/bin/bash
+
+extension=".bak"
+mkdir respaldos
+for nombre in $(ls)
+do
+	cp $nombre "$nombre$extension"
+done
